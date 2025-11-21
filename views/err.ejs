@@ -1,0 +1,11 @@
+
+<% layout("/layouts/boilerplate")%>
+
+<div class="row">
+    <div class="alert alert-danger col-6 offset-3" role="alert">
+    <h4 class="alert-heading">Error <%= err.status || 500 %>: <%= err.message || "Something went wrong!" %></h4>
+    <% if (process.env.NODE_ENV !== 'production' && err.stack) { %>
+        <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow-x: auto;"><%= err.stack %></pre>
+    <% } %>
+</div>
+</div>
