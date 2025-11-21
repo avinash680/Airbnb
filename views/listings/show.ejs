@@ -16,6 +16,8 @@
       &#8377; <%= (listing.price != null) ? listing.price.toLocaleString("en-IN") : 'N/A' %><br>
       <%= listing.location %><br>
       <%= listing.country %>
+      <br>
+      <small class="text-muted">Owner: <%= listing.owner ? (listing.owner.username || listing.owner.email || 'Unknown') : 'Unknown' %></small>
     </p>
   </div>
 </div>
@@ -40,6 +42,3 @@
 </div>
  
  
-
-
- _s novalidate

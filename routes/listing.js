@@ -58,7 +58,7 @@ router.get("/new", isLoggedIn,  (req, res) => {
 //show Route (trim and validate id)
 router.get("/:id", wrapAsync(async (req, res) => {
      let { id } = req.params;
-     const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id).populate("reviews").populate('owner');
      if(!listing) {
        req.flash("success", "Listing you requested for does not exist!");
        return res.redirect("/listings");
@@ -78,10 +78,13 @@ router.post("/", validateListing, isLoggedIn,  wrapAsync (async (req,res) => {
       filename: "listingimage"
     };
   }
-  const newListing =  new Listing(listingData);
-  await newListing.save();
+  // assign owner from authenticated user
+  if (req.user && req.user._id) {
+    listingData.owner = req.user._id;
+  }
+  const newListing = await Listing.create(listingData);
   req.flash("success", "New Listing Created!");
-  res.redirect("/listings");
+  res.redirect(`/listings/${newListing._id}`);
   
 }));
 
