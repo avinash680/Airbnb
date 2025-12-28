@@ -1,6 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
-  <h3>all listings</h3>
+  <h3>All listings</h3>
+  
+  
   <!-- <form action="/listings/new" method="GET">
     <button>Creat New Listing</button>
   </form> -->
@@ -9,7 +11,7 @@
 
 <% if (allListings && allListings.length > 0) { %>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-<% for( listing of allListings ) { %>
+<% for (let listing of allListings) { %>
  <a href="/listings/<%= listing._id %>" class="listing-link text-reset">
   <div class="card col listing-card">
     <img src="<%= (listing.image && listing.image.url) ? listing.image.url : '/images/default-listing.svg' %>" class="card-img-top" alt="listing_image" style="height: 20rem; width:100%; object-fit:cover;">
